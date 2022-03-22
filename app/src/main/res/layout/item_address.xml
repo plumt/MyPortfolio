@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="itemAddress"
+            type="com.test.myportfolio.data.model.AddressModel.AddressModels.List" />
+
+        <variable
+            name="addressItemListener"
+            type="com.test.myportfolio.base.BaseRecyclerAdapter.OnItemClickListener" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <TextView
+                android:id="@+id/txt_title_lnmAdres"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="right"
+                android:includeFontPadding="false"
+                android:text="도로명 :"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_lnmAdres" />
+
+            <TextView
+                android:id="@+id/txt_lnmAdres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:includeFontPadding="false"
+                android:onClick="@{(v) -> addressItemListener.onItemClick(itemAddress, v)}"
+                android:tag="도로명 주소"
+                android:text="@{itemAddress.lnmAdres}"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txt_title_lnmAdres"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/txt_title_rnAdres"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="right"
+                android:includeFontPadding="false"
+                android:text="번지 :"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_rnAdres" />
+
+            <TextView
+                android:id="@+id/txt_rnAdres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:includeFontPadding="false"
+                android:onClick="@{(v) -> addressItemListener.onItemClick(itemAddress, v)}"
+                android:tag="번지 주소"
+                android:text="@{itemAddress.rnAdres}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txt_title_rnAdres"
+                app:layout_constraintTop_toBottomOf="@id/txt_lnmAdres" />
+
+            <TextView
+                android:id="@+id/txt_title_zipNo"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="right"
+                android:includeFontPadding="false"
+                android:text="우편 :"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txt_zipNo" />
+
+
+            <TextView
+                android:id="@+id/txt_zipNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:includeFontPadding="false"
+                android:onClick="@{(v) -> addressItemListener.onItemClick(itemAddress, v)}"
+                android:tag="우편번호"
+                android:text="@{`(`+itemAddress.zipNo+`)`}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txt_title_zipNo"
+                app:layout_constraintTop_toBottomOf="@id/txt_rnAdres" />
+
+            <View
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="#f3f3f3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

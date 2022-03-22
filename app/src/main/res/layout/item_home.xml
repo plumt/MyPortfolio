@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemHome"
+            type="com.test.myportfolio.data.model.HomeModel" />
+
+
+        <variable
+            name="homeItemListener"
+            type="com.test.myportfolio.base.BaseRecyclerAdapter.OnItemClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+
+        <Button
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{itemHome.title}"
+            android:id="@+id/btn_home"
+            android:onClick="@{(v) -> homeItemListener.onItemClick(itemHome, v)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

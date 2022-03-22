@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="papago"
+            type="com.test.myportfolio.ui.main.papago.PapagoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_papago"
+            android:layout_width="0dp"
+            android:layout_height="84dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="1dp"
+            app:cardBackgroundColor="#f3f3f3"
+            app:cardCornerRadius="21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#cccccc"
+            app:strokeWidth="1dp">
+
+            <EditText
+                android:onTextChanged="@{(a,b,c,d) -> papago.onTextChanged(a)}"
+                android:id="@+id/et_papago"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:maxLength="30"
+                android:paddingStart="23dp"
+                android:paddingEnd="36dp"
+                android:singleLine="true"
+                android:text="@={papago.inputText}"
+                android:textColor="#232323"
+                android:textSize="18sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:enabled="@{papago.transText.length() > 0 ? true : false}"
+            android:onClick="@{() -> papago.btnClick(`복사`)}"
+            android:text="복사"
+            app:layout_constraintEnd_toStartOf="@id/btn_clear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mcv_papago" />
+
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:enabled="@{papago.inputText.length() > 0 ? true : false}"
+            android:onClick="@{() -> papago.btnClick(`초기화`)}"
+            android:text="초기화"
+            app:layout_constraintEnd_toStartOf="@id/btn_trans"
+            app:layout_constraintStart_toEndOf="@id/btn_copy"
+            app:layout_constraintTop_toBottomOf="@id/mcv_papago" />
+
+        <Button
+            android:id="@+id/btn_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:enabled="@{papago.inputText.length() > 0 ? true : false}"
+            android:onClick="@{() -> papago.btnClick(`번역`)}"
+            android:text="번역"
+            app:layout_constraintEnd_toStartOf="@id/btn_history"
+            app:layout_constraintStart_toEndOf="@id/btn_clear"
+            app:layout_constraintTop_toBottomOf="@id/mcv_papago" />
+
+        <Button
+            android:id="@+id/btn_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> papago.btnClick(`기록`)}"
+            android:text="기록"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_trans"
+            app:layout_constraintTop_toBottomOf="@id/mcv_papago" />
+
+        <TextView
+            android:id="@+id/txt_papago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:includeFontPadding="false"
+            android:text="@{papago.transText}"
+            app:layout_constraintTop_toBottomOf="@id/btn_trans" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

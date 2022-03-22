@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="encyclopedia"
+            type="com.test.myportfolio.ui.main.encyclopedia.EncyclopediaViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_encyclopedia"
+        android:overScrollMode="never"
+        android:layout_margin="10dp"
+        replaceAll="@{encyclopedia.encyclopediaItems}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_encyclopedia" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

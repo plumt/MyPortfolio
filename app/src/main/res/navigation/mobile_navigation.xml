@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/bluetoothFragment"
+    >
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.test.myportfolio.ui.main.movie.MovieFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_movie">
+
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_encyclopedia"
+        android:id="@+id/encyclopediaFragment"
+        android:name="com.test.myportfolio.ui.main.encyclopedia.EncyclopediaFragment"
+        android:label="EncyclopediaFragment" />
+
+    <fragment
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_home"
+        android:id="@+id/homeFragment"
+        android:name="com.test.myportfolio.ui.main.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_encyclopediaFragment"
+            app:destination="@id/encyclopediaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_navigation_movie"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_papagoFragment"
+            app:destination="@id/papagoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bluetoothFragment"
+            app:destination="@id/bluetoothFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fastCampusFragment"
+            app:destination="@id/fastCampusFragment" />
+        <!--            app:popUpTo="@id/homeFragment"-->
+        <!--            app:popUpToInclusive="true"-->
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_papago"
+        android:id="@+id/papagoFragment"
+        android:name="com.test.myportfolio.ui.main.papago.PapagoFragment"
+        android:label="PapagoFragment" >
+        <action
+            android:id="@+id/action_papagoFragment_to_papagoHistoryFragment"
+            app:destination="@id/papagoHistoryFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_papago_history"
+        android:id="@+id/papagoHistoryFragment"
+        android:name="com.test.myportfolio.ui.main.papago.PapagoHistoryFragment"
+        android:label="PapagoHistoryFragment" />
+
+    <fragment
+        tools:layout="@layout/fragment_address"
+        android:id="@+id/addressFragment"
+        android:name="com.test.myportfolio.ui.main.address.AddressFragment"
+        android:label="AddressFragment" />
+    <fragment
+        tools:layout="@layout/fragment_calendar"
+        android:id="@+id/calendarFragment"
+        android:name="com.test.myportfolio.ui.main.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+    <fragment
+        tools:layout="@layout/fragment_bluetooth"
+        android:id="@+id/bluetoothFragment"
+        android:name="com.test.myportfolio.ui.main.bluetooth.BluetoothFragment"
+        android:label="BluetoothFragment" />
+    <fragment
+        tools:layout="@layout/fragment_fastcampus"
+        android:id="@+id/fastCampusFragment"
+        android:name="com.test.myportfolio.fastcampus.FastCampusFragment"
+        android:label="FastCampusFragment" />
+
+
+</navigation>
