@@ -1,16 +1,26 @@
 package com.test.myportfolio.ui.main.movie
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.test.myportfolio.MainViewModel
 import com.test.myportfolio.R
 import com.test.myportfolio.base.BaseViewModel
 import com.test.myportfolio.base.ListLiveData
 import com.test.myportfolio.data.model.MovieModel
+import com.test.myportfolio.data.repository.api.ApiClass
+//import com.test.myportfolio.data.repository.api.ApiClass
 import com.test.myportfolio.data.repository.api.NaverApi
 import com.test.myportfolio.util.PreferenceManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
+import org.koin.android.viewmodel.compat.SharedViewModelCompat.sharedViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.ext.scope
 
 class MovieViewModel(
     application: Application,
@@ -30,52 +40,46 @@ class MovieViewModel(
 
     private var page = 1
 
-    fun getMovieList() {
-        api.movie(
-            mContext.getString(R.string.CLIENT_ID),
-            mContext.getString(R.string.CLIENT_SERVICE),
-            searchMovie.value!!.trim(),
-            page
-        )
-            .observeOn(Schedulers.io())
-            .subscribeOn(Schedulers.io())
-            .flatMap {
-                if (it.items != null) {
-                    Observable.just(it)
-                } else {
-                    Observable.empty()
+    fun getMovieList(clear: Boolean = false) {
+        viewModelScope.launch {
+            try {
+                (callApi(
+                    api.movie(
+                        mContext.getString(R.string.CLIENT_ID),
+                        mContext.getString(R.string.CLIENT_SERVICE),
+                        searchMovie.value!!.trim(),
+                        page
+                    )
+                ) as MovieModel.RS).items!!.run {
+                    if (clear) reset()
+                    movieItems.addAll(setId(this, movieItems.value!!.size))
                 }
+            } catch (e: Throwable) {
+                Log.e("lys", "error : ${e.message}")
+            }
+        }
 
-            }.observeOn(AndroidSchedulers.mainThread()).map {
-                it.items!!.forEach { movieList ->
-                    var equals = true
-                    movieItems.value!!.forEach {
-                        if (it.link == movieList.link) {
-                            equals = false
-                        }
-                    }
-                    if (equals) {
-                        movieItems.add(
-                            MovieModel.RS.List(
-                                index++,
-                                0,
-                                movieList.title,
-                                movieList.link,
-                                movieList.image,
-                                movieList.pubDate,
-                                movieList.director,
-                                movieList.actor,
-                                movieList.userRating
-                            )
-                        )
-                    }
-                }
-            }.subscribe({
-                flag = true
-            }, {
-                flag = true
-                it.printStackTrace()
-            })
+
+//        ApiClass(
+//            api.movie(
+//                mContext.getString(R.string.CLIENT_ID),
+//                mContext.getString(R.string.CLIENT_SERVICE),
+//                searchMovie.value!!.trim(),
+//                page
+//            )
+//        ).run{
+//            Log.d("lys","result : ${callApi().items}")
+//        }
+
+//            .run {
+//            callApi().map {
+//                Log.d("lys", "result -> ${it}")
+//            }.subscribe({
+//                Log.d("lys", "success : ${movieItems.value!!}")
+//            }, {
+//                Log.d("lys", "fail : ${it.message}")
+//            })
+//        }
     }
 
     fun nextPage() {
@@ -93,8 +97,7 @@ class MovieViewModel(
 
     fun searchBtn() {
         index = 0
-        reset()
-        getMovieList()
+        getMovieList(true)
     }
 
     private fun reset() {

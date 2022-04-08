@@ -14,8 +14,8 @@ data class CalendarModel(
 )
 
 data class CalendarModels(
-    override val id: Int = 0,
-    override val viewType: Int = 0,
+    override var id: Int = 0,
+    override var viewType: Int = 0,
     val date: String = "",
     val event: String = ""
 ) : Item()

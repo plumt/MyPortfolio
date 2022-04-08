@@ -10,8 +10,8 @@ object EncyclopediaModel {
         val items: List<Items>?
     ){
         data class Items(
-            override val id: Int = 0,
-            override val viewType: Int = 0,
+            override var id: Int = 0,
+            override var viewType: Int = 0,
             val title: String = "",
             val link: String = "",
             val thumbnail: String = "",

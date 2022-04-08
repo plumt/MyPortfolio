@@ -36,7 +36,7 @@ val networkModule = module {
         return if (type == 1) {
             Retrofit.Builder()
                 .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(client)
                 .build()

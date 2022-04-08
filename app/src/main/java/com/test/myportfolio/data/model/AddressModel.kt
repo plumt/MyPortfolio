@@ -53,8 +53,8 @@ object AddressModel {
        val items: ArrayList<List>
     ) {
         data class List(
-        override val id: Int = 0,
-        override val viewType: Int = 0,
+        override var id: Int = 0,
+        override var viewType: Int = 0,
         val zipNo: String = "",
         val lnmAdres: String = "",
         val rnAdres: String = ""

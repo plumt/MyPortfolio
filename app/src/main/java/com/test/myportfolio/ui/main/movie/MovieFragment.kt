@@ -47,11 +47,12 @@ class MovieFragment :
     var animationDelay = true
     var animationFlag = true
 
+
 //    val selected = PublishSubject.create<Boolean>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMovieList()
+//        viewModel.getMovieList()
 
 //        binding.refreshLayoutMovie.setOnRefreshListener {
 //            viewModel.searchBtn()

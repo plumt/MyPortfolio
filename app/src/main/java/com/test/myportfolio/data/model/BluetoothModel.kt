@@ -3,8 +3,8 @@ package com.test.myportfolio.data.model
 import com.test.myportfolio.base.Item
 
 data class BluetoothModel(
-    override val id: Int = 0,
-    override val viewType: Int = 0,
+    override var id: Int = 0,
+    override var viewType: Int = 0,
     val uuid: String = "",
     val mac: String = "",
     var time: String = "",
